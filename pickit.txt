@@ -1,0 +1,245 @@
+// =====================================================================
+//  Grand Pickit Rules  -  Place in same folder as D2RMAP.exe
+// =====================================================================
+//
+// ----- TWO RULE FORMATS ARE SUPPORTED -----
+//
+//  1) SIMPLE FORMAT
+//     Syntax:  itemname [quality=N] [eth] [unid] [sockets=N/>=N/<=N]
+//
+//     Special keywords (use instead of an item name):
+//       rune        - matches ALL runes (El through Zod)
+//       fullrejuv   - matches Full Rejuvenation Potions (skips if belt full)
+//       *           - wildcard, matches ANY item
+//       txt=NNN     - matches by internal txtFileNo (advanced)
+//
+//     Condition modifiers (append after the item name):
+//       quality=N   - require exact quality  (see quality table below)
+//       quality>=N  - require quality >= N
+//       quality<=N  - require quality <= N
+//       eth         - require the item IS ethereal
+//       unid        - require the item is NOT identified
+//       sockets=N   - require exact socket count
+//       sockets>=N  - require sockets >= N
+//       sockets<=N  - require sockets <= N
+//
+//     Quality values:
+//       1 = Inferior (Low Quality)
+//       2 = Normal
+//       3 = Superior
+//       4 = Magic
+//       5 = Set
+//       6 = Rare
+//       7 = Unique
+//       8 = Crafted
+//
+//     Examples:
+//       rune                          - pick up every rune
+//       * quality=7 unid              - pick up all unidentified uniques
+//       monarch quality=4             - pick up magic monarchs
+//       txt=531                       - pick up Full Rejuv by txtFileNo
+//
+//  2) KOOLO / NIP FORMAT
+//     Syntax:  [property] == value && [property] == value ...
+//
+//     Supported properties:
+//       [Name]      - internal item name (no spaces, camelCase)
+//                     e.g. Monarch, PhaseBlade, SmallCharm, GrandCharm
+//       [Type]      - item type category (e.g. Amulet, Ring)
+//       [Quality]   - quality name: Inferior, Normal, Superior, Magic, Set,
+//                     Rare, Unique, Crafted
+//       [Flag]      - item flag: Ethereal, Identified
+//                     Use "!= Ethereal" to exclude eth items
+//                     Use "!= Identified" to require unidentified
+//
+//     Operators:  ==  !=  <=  >=
+//     Combine conditions with:  &&  (AND)
+//     Multi-name groups:  ([Name] == X || [Name] == Y) && ...
+//
+//     Everything after '#' is IGNORED (Koolo stat conditions not supported)
+//     Inline // comments are also stripped
+//
+//     Examples:
+//       [Name] == Monarch && [Quality] == Unique
+//       [Name] == SmallCharm && [Quality] == Magic && [Flag] != Identified
+//       [Quality] == Unique && [Flag] != Identified    (wildcard - all unid uniques)
+//
+// =====================================================================
+
+
+// =========================
+//         RUNES
+// =========================
+// Picks up ALL runes (El #1 through Zod #33)
+rune
+
+
+// =========================
+//    UNIDENTIFIED UNIQUES
+// =========================
+// Any unique item that hasn't been identified yet (wildcard match)
+[Quality] == Unique && [Flag] != Identified
+
+
+// =========================
+//        POTIONS
+// =========================
+// Full Rejuvenation Potion - auto-skips if belt is already full
+[Name] == FullRejuvenationPotion
+
+
+// =========================
+//    ESSENCES & TOKENS
+// =========================
+// Dropped by act bosses in Hell - used to craft Token of Absolution
+[Name] == TwistedEssenceOfSuffering                   // Andariel / Duriel
+[Name] == ChargedEssenceOfHatred                      // Mephisto
+[Name] == BurningEssenceOfTerror                      // Diablo
+[Name] == FesteringEssenceOfDestruction               // Baal
+[Name] == TokenOfAbsolution                           // Resets skill/stat points
+
+
+// =========================
+//   UBER MATERIALS (ROTW)
+// =========================
+// Realm of the Worldstone shard drops
+[Name] == WesternWorldStoneShard
+[Name] == EasternWorldStoneShard
+[Name] == SouthernWorldStoneShard
+[Name] == DeepWorldStoneShard
+[Name] == NorthernWorldStoneShard
+
+
+// =========================
+//        CHARMS
+// =========================
+// Unidentified magic small charms (looking for life/resist SCs)
+[Name] == SmallCharm && [Quality] == Magic && [Flag] != Identified
+
+// Unidentified magic grand charms (looking for skillers/life GCs)
+[Name] == GrandCharm && [Quality] == Magic && [Flag] != Identified
+
+// Unique grand charms - Gheed's Fortune
+[Name] == GrandCharm && [Quality] == Unique && [Flag] != Identified
+
+// Unique small charms - Annihilus
+[Name] == SmallCharm && [Quality] == Unique && [Flag] != Identified
+
+
+// =========================
+//    JEWELRY (UNID)
+// =========================
+// Unidentified unique rings - Stone of Jordan, Bul-Kathos, etc.
+[Name] == Ring && [Quality] == Unique && [Flag] != Identified
+
+// Unidentified unique amulets - Mara's, Highlord's, etc.
+[Name] == Amulet && [Quality] == Unique && [Flag] != Identified
+
+// Unidentified unique jewels - Rainbow Facets
+[Name] == Jewel && [Quality] == Unique && [Flag] != Identified
+
+// Unidentified magic jewels (looking for 40ED/15IAS jewels)
+[Name] == Jewel && [Quality] == Magic && [Flag] != Identified
+
+
+// =========================
+//     RUNEWORD BASES
+// =========================
+// Monarch - Spirit shield base (4os magic for reroll, or <= superior)
+[Name] == Monarch && [Quality] <= Superior              // 4os for Spirit
+[Name] == Monarch && [Quality] == Magic && [Flag] != Ethereal
+
+// Phase Blade - indestructible, ideal for runewords
+// Non-eth, superior or below, looking for 5-6os (Grief, Last Wish, etc.)
+[Name] == PhaseBlade && [Quality] <= Superior && [Flag] != Ethereal
+
+// Superior Phase Blade - 4-5+ sockets for Grief, CTA, etc.
+[Name] == PhaseBlade && [Quality] == Superior
+
+// Amazon javelins - magic for crafting/imbuing
+([Name] == MaidenJavelin || [Name] == CeremonialJavelin || [Name] == MatriarchalJavelin) && [Quality] == Magic && [Flag] != Ethereal
+
+
+// =========================
+//     UNIQUE ARMOR
+// =========================
+// Harlequin Crest (Shako)
+[Name] == Shako && [Quality] == Unique
+
+// Tyrael's Might - Sacred Armor
+[Name] == SacredArmor && [Quality] == Unique
+
+// Arachnid Mesh - Spiderweb Sash
+[Name] == SpiderwebSash && [Quality] == Unique
+
+// Andariel's Visage - Demon Head (unid)
+[Name] == DemonHead && [Quality] == Unique && [Flag] != Identified
+
+// Crown of Ages - Corona
+[Name] == Corona && [Quality] == Unique
+
+// Griffon's Eye - Diadem (unid + any)
+[Name] == Diadem && [Quality] == Unique && [Flag] != Identified
+[Name] == Diadem && [Quality] == Unique
+
+// Unidentified unique tiara (Kira's Guardian, etc.)
+[Name] == Tiara && [Quality] == Unique && [Flag] != Identified
+
+
+// =========================
+//    UNIQUE GLOVES
+// =========================
+// Magefist - Light Gauntlets (base version)
+[Name] == LightGauntlets && [Quality] == Unique
+
+// Magefist Upgrade x1 - Battle Gauntlets
+[Name] == BattleGauntlets && [Quality] == Unique
+
+// Magefist Upgrade x2 - Crusader Gauntlets
+[Name] == CrusaderGauntlets && [Quality] == Unique
+
+// Dracul's Grasp - Vampirebone Gloves
+[Name] == VampireboneGloves && [Quality] == Unique
+
+
+// =========================
+//    UNIQUE BOOTS
+// =========================
+// War Traveler - Battle Boots (non-eth, looking for high MF/ED)
+[Name] == BattleBoots && [Quality] == Unique && [Flag] != Ethereal
+
+
+// =========================
+//   UNIQUE WEAPONS/ORBS
+// =========================
+// Eschuta's Temper - Eldritch Orb
+[Name] == EldritchOrb && [Quality] == Unique
+
+// Death's Fathom - Dimensional Shard
+[Name] == DimensionalShard && [Quality] == Unique
+
+
+// =========================
+//    TAL RASHA'S SET
+// =========================
+// Tal Rasha's Lidless Eye - Swirling Crystal (weapon)
+[Name] == SwirlingCrystal && [Quality] == Set
+
+// Tal Rasha's Horadric Crest - Death Mask (helm)
+[Name] == DeathMask && [Quality] == Set
+
+// Tal Rasha's Guardianship - Lacquered Plate (armor)
+[Name] == LacqueredPlate && [Quality] == Set
+
+// Tal Rasha's Adjudication - Set Amulet
+[Type] == Amulet && [Quality] == Set && [Flag] != Identified
+
+// Tal Rasha's Fine-Spun Cloth - Mesh Belt
+[Name] == MeshBelt && [Quality] == Set
+
+
+// =========================
+//   ALL SET ITEMS (UNID)
+// =========================
+// Catch-all: pick up any unidentified set item
+* quality=5 unid
