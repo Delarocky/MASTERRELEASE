@@ -54,7 +54,9 @@
 //
 //     Operators:  ==  !=  <=  >=
 //     Combine conditions with:  &&  (AND)
-//     Multi-name groups:  ([Name] == X || [Name] == Y) && ...
+//
+//     NOTE: || (OR) groups only match the FIRST name. If you need
+//           multiple names, write each as a SEPARATE rule line.
 //
 //     Everything after '#' is IGNORED (Koolo stat conditions not supported)
 //     Inline // comments are also stripped
@@ -63,6 +65,32 @@
 //       [Name] == Monarch && [Quality] == Unique
 //       [Name] == SmallCharm && [Quality] == Magic && [Flag] != Identified
 //       [Quality] == Unique && [Flag] != Identified    (wildcard - all unid uniques)
+//
+//  SUPPORTED EQUIPMENT NAMES (resolved to txtFileNo at parse time):
+//     Helms:    Shako, DeathMask, GrimHelm, DemonHead, Corona, Tiara,
+//              Diadem, BoneVisage, GiantConch, SpiredHelm
+//     Armor:    SacredArmor, ArchonPlate, LacqueredPlate, DuskShroud,
+//              Wyrmhide, ScarabHusk, WireFleece, GreatHauberk, Boneweave,
+//              DiamondMail, LoricatedMail, ShadowPlate, HellforgePlate,
+//              KrakenShell, BalrogSkin
+//     Shields:  Monarch, Aegis, Ward, TrollNest, BladeBarrier, Hyperion
+//     PalShld:  VortexShield, ZakarumShield, KurastShield, SacredTarge,
+//              SacredRondache
+//     Swords:   PhaseBlade, ColossusBlade, ColossusSword, ConquestSword,
+//              CrypticSword
+//     Axes:     BerserkerAxe, ChampionAxe, GloriousAxe, EttinAxe, FeralAxe
+//     Polearms: GiantThresher, ColossusVoulge, GreatPoleaxe, CrypticAxe,
+//              Thresher, OgreAxe
+//     Maces:    ThunderMaul, LegendaryMallet, Scourge
+//     Staves:   ArchonStaff
+//     Bows:     CrusaderBow, HydraBow, WardBow
+//     Gloves:   LightGauntlets, BattleGauntlets, CrusaderGauntlets,
+//              VampireboneGloves, Vambraces
+//     Boots:    BattleBoots, MirroredBoots, MyrmidonGreaves
+//     Belts:    SpiderwebSash, VampirefangBelt, MithrilCoil, MeshBelt
+//     Orbs:     SwirlingCrystal, EldritchOrb, DimensionalShard
+//     Claws:    RunicTalons, ScissorsSuwayyah, FeralClaws
+//     Javelins: MaidenJavelin, CeremonialJavelin, MatriarchalJavelin
 //
 // =====================================================================
 
@@ -77,7 +105,9 @@ rune
 // =========================
 //    UNIDENTIFIED UNIQUES
 // =========================
-// Any unique item that hasn't been identified yet (wildcard match)
+// Any unique item that hasn't been identified yet (wildcard match).
+// This catches ALL uniques including Shako, War Traveler, Magefist,
+// Dracul's, Andariel's Visage, etc. - even if not listed by name below.
 [Quality] == Unique && [Flag] != Identified
 
 
@@ -102,7 +132,7 @@ rune
 // =========================
 //   UBER MATERIALS (ROTW)
 // =========================
-// Realm of the Worldstone shard drops
+// Realm of the Worldstone shard drops.
 [Name] == WesternWorldStoneShard
 [Name] == EasternWorldStoneShard
 [Name] == SouthernWorldStoneShard
@@ -157,12 +187,18 @@ rune
 [Name] == PhaseBlade && [Quality] == Superior
 
 // Amazon javelins - magic for crafting/imbuing
-([Name] == MaidenJavelin || [Name] == CeremonialJavelin || [Name] == MatriarchalJavelin) && [Quality] == Magic && [Flag] != Ethereal
+[Name] == MaidenJavelin && [Quality] == Magic && [Flag] != Ethereal
+[Name] == CeremonialJavelin && [Quality] == Magic && [Flag] != Ethereal
+[Name] == MatriarchalJavelin && [Quality] == Magic && [Flag] != Ethereal
 
 
 // =========================
 //     UNIQUE ARMOR
 // =========================
+// NOTE: All of these are also caught by the wildcard unid-unique
+//       rule above. The specific rules here are for items you want
+//       to pick up even if already IDENTIFIED (no [Flag] != Identified).
+
 // Harlequin Crest (Shako)
 [Name] == Shako && [Quality] == Unique
 
@@ -172,49 +208,19 @@ rune
 // Arachnid Mesh - Spiderweb Sash
 [Name] == SpiderwebSash && [Quality] == Unique
 
-// Andariel's Visage - Demon Head (unid)
-[Name] == DemonHead && [Quality] == Unique && [Flag] != Identified
-
 // Crown of Ages - Corona
 [Name] == Corona && [Quality] == Unique
 
-// Griffon's Eye - Diadem (unid + any)
-[Name] == Diadem && [Quality] == Unique && [Flag] != Identified
+// Griffon's Eye - Diadem
 [Name] == Diadem && [Quality] == Unique
 
-// Unidentified unique tiara (Kira's Guardian, etc.)
+// Unidentified unique tiara - Kira's Guardian, etc.
 [Name] == Tiara && [Quality] == Unique && [Flag] != Identified
 
 
 // =========================
-//    UNIQUE GLOVES
+//    UNIQUE WEAPONS/ORBS
 // =========================
-// Magefist - Light Gauntlets (base version)
-[Name] == LightGauntlets && [Quality] == Unique
-
-// Magefist Upgrade x1 - Battle Gauntlets
-[Name] == BattleGauntlets && [Quality] == Unique
-
-// Magefist Upgrade x2 - Crusader Gauntlets
-[Name] == CrusaderGauntlets && [Quality] == Unique
-
-// Dracul's Grasp - Vampirebone Gloves
-[Name] == VampireboneGloves && [Quality] == Unique
-
-
-// =========================
-//    UNIQUE BOOTS
-// =========================
-// War Traveler - Battle Boots (non-eth, looking for high MF/ED)
-[Name] == BattleBoots && [Quality] == Unique && [Flag] != Ethereal
-
-
-// =========================
-//   UNIQUE WEAPONS/ORBS
-// =========================
-// Eschuta's Temper - Eldritch Orb
-[Name] == EldritchOrb && [Quality] == Unique
-
 // Death's Fathom - Dimensional Shard
 [Name] == DimensionalShard && [Quality] == Unique
 
@@ -222,24 +228,17 @@ rune
 // =========================
 //    TAL RASHA'S SET
 // =========================
-// Tal Rasha's Lidless Eye - Swirling Crystal (weapon)
-[Name] == SwirlingCrystal && [Quality] == Set
-
-// Tal Rasha's Horadric Crest - Death Mask (helm)
-[Name] == DeathMask && [Quality] == Set
-
-// Tal Rasha's Guardianship - Lacquered Plate (armor)
+// Tal Rasha's Guardianship - Lacquered Plate
 [Name] == LacqueredPlate && [Quality] == Set
 
 // Tal Rasha's Adjudication - Set Amulet
 [Type] == Amulet && [Quality] == Set && [Flag] != Identified
 
-// Tal Rasha's Fine-Spun Cloth - Mesh Belt
-[Name] == MeshBelt && [Quality] == Set
-
 
 // =========================
 //   ALL SET ITEMS (UNID)
 // =========================
-// Catch-all: pick up any unidentified set item
+// Catch-all: pick up any unidentified set item.
+// This catches ALL set items including Tal Rasha pieces (DeathMask,
+// SwirlingCrystal, MeshBelt) even if not listed by name above.
 * quality=5 unid
