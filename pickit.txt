@@ -117,6 +117,12 @@ rune
 // Full Rejuvenation Potion - auto-skips if belt is already full
 [Name] == FullRejuvenationPotion
 
+// Super Healing Potion - auto-skips if belt HP column is full
+[Name] == SuperHealingPotion
+
+// Super Mana Potion - auto-skips if belt Mana column is full
+[Name] == SuperManaPotion
+
 
 // =========================
 //    ESSENCES & TOKENS
