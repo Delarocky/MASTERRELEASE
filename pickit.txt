@@ -181,6 +181,12 @@ rune
 // =========================
 //     RUNEWORD BASES
 // =========================
+// Vortex Shield - Paladin base (normal/white for socketing)
+[Name] == VortexShield && [Quality] == Normal
+
+// Colossus Voulge - Eth 4os Insight/Infinity base
+colossusvoulge quality<=3 eth sockets=4
+
 // Monarch - Spirit shield base (4os magic for reroll, or <= superior)
 [Name] == Monarch && [Quality] <= Superior              // 4os for Spirit
 [Name] == Monarch && [Quality] == Magic && [Flag] != Ethereal
