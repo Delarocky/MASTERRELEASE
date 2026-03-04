@@ -65,6 +65,7 @@
 //       [Name] == Monarch && [Quality] == Unique
 //       [Name] == SmallCharm && [Quality] == Magic && [Flag] != Identified
 //       [Quality] == Unique && [Flag] != Identified    (wildcard - all unid uniques)
+//       [Name] >= HelRune && [Name] <= ZodRune          (rune range: Hel through Zod)
 //
 //  SUPPORTED EQUIPMENT NAMES (resolved to txtFileNo at parse time):
 //     Helms:    Shako, DeathMask, GrimHelm, DemonHead, Corona, Tiara,
@@ -98,8 +99,8 @@
 // =========================
 //         RUNES
 // =========================
-// Picks up ALL runes (El #1 through Zod #33)
-rune
+// Picks up runes Hel (#15) through Zod (#33)
+[Name] >= HelRune && [Name] <= ZodRune
 
 
 // =========================
