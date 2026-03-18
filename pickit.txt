@@ -73,7 +73,7 @@
 //     Armor:    SacredArmor, ArchonPlate, LacqueredPlate, DuskShroud,
 //              Wyrmhide, ScarabHusk, WireFleece, GreatHauberk, Boneweave,
 //              DiamondMail, LoricatedMail, ShadowPlate, HellforgePlate,
-//              KrakenShell, BalrogSkin
+//              KrakenShell, BalrogSkin, MagePlate
 //     Shields:  Monarch, Aegis, Ward, TrollNest, BladeBarrier, Hyperion
 //     PalShld:  VortexShield, ZakarumShield, KurastShield, SacredTarge,
 //              SacredRondache
@@ -203,6 +203,12 @@ colossusvoulge quality<=3 eth sockets=4
 [Name] == MaidenJavelin && [Quality] == Magic && [Flag] != Ethereal
 [Name] == CeremonialJavelin && [Quality] == Magic && [Flag] != Ethereal
 [Name] == MatriarchalJavelin && [Quality] == Magic && [Flag] != Ethereal
+
+// Mage Plate - Enigma base (low str req 55, max 3 sockets)
+// 3-open-socket (ready for Enigma: Jah + Ith + Ber)
+[Name] == MagePlate && [Quality] == Normal && sockets=3
+// White / no-socket (for Larzuk quest socket or cube recipe)
+[Name] == MagePlate && [Quality] == Normal && sockets=0
 
 
 // =========================
