@@ -117,7 +117,7 @@
 // =========================
 // Full Rejuvenation Potion - auto-skips if belt is already full
 [Name] == FullRejuvenationPotion
-
+[Name] == RejuvenationPotion
 // Super Healing Potion - auto-skips if belt HP column is full
 [Name] == SuperHealingPotion
 
