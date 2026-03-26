@@ -146,6 +146,13 @@
 [Name] == DeepWorldStoneShard
 [Name] == NorthernWorldStoneShard
 
+// Uber Ancient Summon Materials (Act 1-5) - statue drops
+txt=679
+txt=680
+txt=681
+txt=682
+txt=683
+
 
 // =========================
 //        CHARMS
