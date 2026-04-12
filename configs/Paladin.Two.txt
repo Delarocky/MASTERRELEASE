@@ -1,0 +1,83 @@
+# ============================================================
+# Paladin.Two.txt - Bot config for character "Two"
+# ============================================================
+# Set Scripts.X = true to enable that script.
+# Scripts run in order: Act1 -> Act2 -> Act3 -> Act4 -> Act5.
+# Per-script settings only matter if that script is enabled.
+# ============================================================
+
+# === Act 1 ===
+Scripts.Countess = false
+    Config.Countess.KillGhosts = false
+Scripts.Pit = false
+    Config.Pit.ClearBoth = true
+Scripts.Andariel = false
+Scripts.Cows = false
+
+# === Act 2 ===
+Scripts.AncientTunnels = false
+Scripts.Summoner = false
+Scripts.Tombs = false
+Scripts.Duriel = false
+
+# === Act 3 ===
+Scripts.LowerKurast = false
+    Config.LowerKurast.Runs = 0         // 0 = infinite
+Scripts.Travincal = false
+Scripts.Mephisto = false
+    Config.Mephisto.MoatTrick = false
+    Config.Mephisto.KillCouncil = false
+
+# === Act 4 ===
+Scripts.Diablo = true
+    Config.Diablo.Entrance = false       // true = start from entrance, TP + clear
+                                        // false = start from star, skip entrance
+    Config.Diablo.FullClear = true   // true = kill everything on the way
+                                        // false = seal rush: tele to seals, pop, kill boss, next
+
+# === Act 5 ===
+Scripts.Pindleskin = false
+    Config.Pindleskin.KillNihlathak = false
+Scripts.Nihlathak = false
+Scripts.Eldritch = false
+    Config.Eldritch.KillShenk = true
+Scripts.Baal = false
+    Config.Baal.KillBaal = true
+    Config.Baal.ClearThrone = true
+
+# === Special ===
+Scripts.Rushee = false
+    Config.Rushee.Quester = false
+    Config.Rushee.Leader =
+
+# ============================================================
+# General settings
+# ============================================================
+Config.General.ChickenLife = 30         // Exit game at this % life
+Config.General.ChickenMana = 0
+Config.General.MaxGameTime = 0          // Seconds, 0 = unlimited
+Config.General.MinGameTime = 0          // Seconds, stall if done early
+Config.General.Pickit = true
+Config.General.PickitBoomerang = true
+Config.General.PickRange = 40
+Config.General.GameName = baal              // Prefix: creates baal000, baal001, baal002...
+Config.General.GamePassword =               // Empty = no password
+Config.General.Difficulty = 2               // 0=Normal 1=Nightmare 2=Hell
+
+# ============================================================
+# Inventory lock configuration. !!!READ CAREFULLY!!!
+# ============================================================
+# 0 = item is locked and won't be moved. If item occupies more than one
+#     slot, ALL of those slots must be set to 0 to lock it in place.
+#     Put 0s where your torch, annihilus, charms — and everything else
+#     you want to KEEP — is.
+# 1 = item is unlocked and the bot may stash, drop or place items here.
+#
+# Default is all 0 (bot won't touch the inventory at all).
+#
+# Grid is 4 rows × 10 columns. Rows are top→bottom, cols are left→right.
+# ============================================================
+Config.Inventory[0] = [1,1,1,1,0,0,0,0,0,0]
+Config.Inventory[1] = [1,1,1,1,0,0,0,0,0,0]
+Config.Inventory[2] = [1,1,1,1,0,0,0,0,0,0]
+Config.Inventory[3] = [1,1,1,1,0,0,0,0,0,0]
