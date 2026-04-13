@@ -109,7 +109,8 @@
 // Any unique item that hasn't been identified yet (wildcard match).
 // This catches ALL uniques including Shako, War Traveler, Magefist,
 // Dracul's, Andariel's Visage, etc. - even if not listed by name below.
-[Quality] == Unique && [Flag] != Identified
+// chronicle = pick up + ID + log, drop unless a specific keep rule also matches.
+[Quality] == Unique && [Flag] != Identified // chronicle
 
 
 // =========================
@@ -267,4 +268,5 @@ colossusvoulge quality<=3 eth sockets=4
 // Catch-all: pick up any unidentified set item.
 // This catches ALL set items including Tal Rasha pieces (DeathMask,
 // SwirlingCrystal, MeshBelt) even if not listed by name above.
-* quality=5 unid
+// chronicle = pick up + ID + log, drop unless a specific keep rule also matches.
+* quality=5 unid // chronicle

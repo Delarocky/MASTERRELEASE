@@ -60,7 +60,8 @@ Config.General.MinGameTime = 0          // Seconds, stall if done early
 Config.General.Pickit = true
 Config.General.PickitBoomerang = true
 Config.General.PickRange = 40
-Config.General.GameName = baal              // Prefix: creates baal000, baal001, baal002...
+Config.General.RunNumber = 4
+Config.General.GameName = baal              // Prefix: creates baal1, baal2, baal3...
 Config.General.GamePassword =               // Empty = no password
 Config.General.Difficulty = 2               // 0=Normal 1=Nightmare 2=Hell
 
