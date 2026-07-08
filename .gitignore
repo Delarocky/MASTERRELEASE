@@ -1,0 +1,19 @@
+# MASTERRELEASE (github.com/Delarocky/MASTERRELEASE)
+# Ship ONLY: D2RMAP.exe, pickit.txt, tools/, updater.exe
+# Everything below is bot leftovers or per-user runtime state — never publish it.
+
+# Bot char configs (the maphack has no bot)
+configs/
+
+# Unused injected packet-sniffer DLL
+D2RInject.dll
+
+# Per-user runtime state (created next to the exe when D2RMAP runs)
+license.key
+d2path.txt
+modmenu.txt
+update.sha
+survivor_*.log
+*.log
+*.old
+*.update

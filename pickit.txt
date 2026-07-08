@@ -1,6 +1,13 @@
 // =====================================================================
-//  Grand Pickit Rules  -  Place in same folder as D2RMAP.exe
+//  Grand Maphack - Pickit Rules   -   Place in same folder as D2RMAP.exe
 // =====================================================================
+//
+//  Pickit can auto-grab items filtered by NAME, TYPE, RARITY/QUALITY,
+//  socket count and ethereal flag - including whole BASES filtered by
+//  rarity (e.g. "any Normal Phase Blade", "any Superior Monarch").
+//
+//  Toggle pickit in-game with Numpad '.'  (starts ON).
+//
 //
 // ----- TWO RULE FORMATS ARE SUPPORTED -----
 //
@@ -67,6 +74,41 @@
 //       [Quality] == Unique && [Flag] != Identified    (wildcard - all unid uniques)
 //       [Name] >= HelRune && [Name] <= ZodRune          (rune range: Hel through Zod)
 //
+// =====================================================================
+//  QUICK RARITY CATCH-ALLS   (copy/uncomment the lines you want)
+// =====================================================================
+//
+//  Pick EVERY item of a given rarity, regardless of base type. Handy as a
+//  starting filter - tighten later with named rules below. Use the "unid"
+//  form so town-farmed / already-ID'd junk is ignored.
+//
+//    ALL UNIQUES (unid):   * quality=7 unid       OR   [Quality] == Unique && [Flag] != Identified
+//    ALL SETS   (unid):    * quality=5 unid       OR   [Quality] == Set    && [Flag] != Identified
+//    ALL RARES  (unid):    * quality=6 unid       OR   [Quality] == Rare   && [Flag] != Identified
+//    ALL MAGIC  (unid):    * quality=4 unid       OR   [Quality] == Magic  && [Flag] != Identified
+//    ALL CRAFTED:          * quality=8            OR   [Quality] == Crafted
+//
+//  ( "ALL UNIQUES" and "ALL SETS" are ENABLED further down. "ALL RARES" /
+//    "ALL MAGIC" are left commented because they pick a LOT - enable if you
+//    want to chip/gamble/reroll rares. )
+//
+// ---------------------------------------------------------------------
+//  PICK A BASE BY RARITY   (whole base type, filtered by quality/sockets)
+// ---------------------------------------------------------------------
+//
+//    Any NORMAL (white) base, for socketing / runewords:
+//       [Name] == PhaseBlade  && [Quality] == Normal          // white PB for Grief/CtA
+//       [Name] == Monarch     && [Quality] <= Superior        // 4os Spirit shield base
+//       [Name] == MagePlate   && [Quality] == Normal && sockets=3   // Enigma base
+//
+//    Any SUPERIOR base (higher max sockets / +dmg-def):
+//       [Name] == PhaseBlade  && [Quality] == Superior        // 4-6os Grief/Last Wish
+//       [Name] == BerserkerAxe && [Quality] <= Superior && [Flag] != Ethereal
+//
+//    Any base of a rarity by txtFileNo (advanced):
+//       colossusvoulge quality<=3 eth sockets=4               // eth 4os Insight/Infinity
+//
+//
 //  SUPPORTED EQUIPMENT NAMES (resolved to txtFileNo at parse time):
 //     Helms:    Shako, DeathMask, GrimHelm, DemonHead, Corona, Tiara,
 //              Diadem, BoneVisage, GiantConch, SpiredHelm
@@ -104,13 +146,21 @@
 
 
 // =========================
-//    UNIDENTIFIED UNIQUES
+//    UNIDENTIFIED UNIQUES   (ALL uniques, any base)
 // =========================
 // Any unique item that hasn't been identified yet (wildcard match).
 // This catches ALL uniques including Shako, War Traveler, Magefist,
 // Dracul's, Andariel's Visage, etc. - even if not listed by name below.
 // chronicle = pick up + ID + log, drop unless a specific keep rule also matches.
 [Quality] == Unique && [Flag] != Identified // chronicle
+
+
+// =========================
+//    ALL RARES (UNID)   -- OPTIONAL: uncomment to grab every rare
+// =========================
+// Grabs EVERY unidentified rare (for chipping / rerolling / gambling bases).
+// Picks a LOT of items - leave commented unless you want the volume.
+// [Quality] == Rare && [Flag] != Identified // chronicle
 
 
 // =========================
@@ -188,7 +238,7 @@ txt=683
 
 
 // =========================
-//     RUNEWORD BASES
+//     RUNEWORD BASES   (base type filtered by rarity/sockets)
 // =========================
 // Vortex Shield - Paladin base (normal/white for socketing)
 [Name] == VortexShield && [Quality] == Normal
@@ -263,7 +313,7 @@ colossusvoulge quality<=3 eth sockets=4
 
 
 // =========================
-//   ALL SET ITEMS (UNID)
+//   ALL SET ITEMS (UNID)   (ALL sets, any base)
 // =========================
 // Catch-all: pick up any unidentified set item.
 // This catches ALL set items including Tal Rasha pieces (DeathMask,
