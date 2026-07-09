@@ -1,0 +1,26 @@
+# Mod menu settings (auto-generated, edit freely)
+pickit=1
+pickit_range=15
+pickit_boomerang=1
+show_all_monsters=1
+predict_overlay=0
+predict_lead_ms=400
+missile_overlay=0
+hide_map_on_panels=1
+hide_map_no_automap=1
+line_opacity=100
+automap_flag_index=-1
+menu_pos_x=3211
+menu_pos_y=104
+autopot_health=50
+autopot_mana=50
+autopot_rejuv=60
+autopot_merc_health=0
+autopot_merc_rejuv=50
+chicken_at=0
+belt_hp_cols=0
+belt_mp_cols=0
+belt_jv_cols=4
+belt_rows=4
+bind_viewinv=103
+bind_pickit=110
